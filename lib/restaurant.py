@@ -5,6 +5,7 @@ class Restaurant:
          self._name = name
          self.all_restaurants.append(self)
     
+     @ property 
      def name(self):
         return self._name
      
@@ -25,6 +26,9 @@ class Restaurant:
          else:
              return 0.0
          
+     @classmethod
+     def all(cls):
+         return cls.all_restaurants     
      
     
      
