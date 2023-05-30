@@ -15,3 +15,6 @@ class Review:
     @classmethod
     def all(cls):
         return cls.all_reviews
+    
+    def customer(self):
+        return self._customer
