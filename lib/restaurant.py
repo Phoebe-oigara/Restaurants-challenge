@@ -1,3 +1,4 @@
+from review import Review
 class Restaurant:
      all_restaurants = []
  
