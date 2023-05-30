@@ -21,3 +21,7 @@ class Review:
     
     def restaurant(self):
         return self._restaurant
+    
+    #method returns the values of the objects rather than object names
+    def __repr__(self):
+        return f"Review(customer={self._customer}, restaurant={self._restaurant}, rating={self._rating})"
