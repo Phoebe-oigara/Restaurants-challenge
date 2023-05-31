@@ -3,44 +3,26 @@ from review import Review
 class Customer:
     all_customers = []
 
-    def __init__(self, name, family_name):
-        self._given_name = name
-        self._family_name = family_name
-        self.all_customers.append(self)
+    def __init__(self, given_name, family_name):
+        self.given_name = given_name
+        self.family_name = family_name
+        self.reviews = []
+        Customer.all_customers.append(self)
 
-
-    def given_name(self):
-        return self._given_name
-    
-
-    def family_name(self):
-        return self._family_name
-    
 
     def full_name(self):
-        return f"{self._given_name} {self._family_name}"
-    
-
-    @classmethod
-    def all(cls):
-        return cls.all_customers
-
-    
+        return self.given_name + " " + self.family_name
+       
     def restaurants(self):
-        reviewed_restaurants = []
-        for review in Review.all():
-            restaurant = review.restaurant()
-            if restaurant not in reviewed_restaurants:
-                reviewed_restaurants.append(restaurant)
-        return [restaurant.name() for restaurant in reviewed_restaurants]
-
+        return list(set([review.restaurant for review in self.reviews]))
 
     def add_review(self, restaurant, rating):
-        Review(self, restaurant, rating)
-
+        review = Review(self, restaurant, rating)
+        self.reviews.append(review)
+        restaurant.add_review(review)
 
     def num_reviews(self):
-        return len(self.reviews())
+        return len(self.reviews)
 
     @classmethod
     def find_by_name(cls, name):
@@ -56,3 +38,11 @@ class Customer:
             if customer.given_name() == name:
                 customers.append(customer)
         return customers
+    
+
+        # reviewed_restaurants = []
+        # for review in Review.all():
+        #     restaurant = review.restaurant()
+        #     if restaurant not in reviewed_restaurants:
+        #         reviewed_restaurants.append(restaurant)
+        # return [restaurant.name() for restaurant in reviewed_restaurants]
